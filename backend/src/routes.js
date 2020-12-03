@@ -1,60 +1,31 @@
-const express = require('express');
-const connection = require('./database/connection');
+const express = require("express");
+const connection = require("./database/connection");
 const routes = express.Router();
-const PostsController = require('./controllers/PostsController');
-const UserController = require('./controllers/UserController');
-const SessionController = require('./controllers/SessionController');
+const PostsController = require("./controllers/PostsController");
+const UserController = require("./controllers/UserController");
+const AuthController = require("./controllers/AuthController");
+const SessionController = require("./controllers/SessionController");
 
-
-const loginValidacao = ('./verificacaoToken');
+const AuthMiddleware = require("./middlewares/AuthMiddleware");
 
 // SESSION CONTROL
-routes.post('/session', SessionController.create);
-
+routes.post(
+  "/login",
+  /* AuthController.athenticate, */ AuthController.athenticate
+);
+routes.post(
+  "/session",
+  /* AuthController.athenticate, */ SessionController.create
+);
 
 // POSTAGENS
-routes.get('/posts',PostsController.listar);
-routes.post('/posts', PostsController.create);
-routes.delete('/posts:id', PostsController.delete);
+routes.get("/posts", /* AuthController.athenticate, */ PostsController.listar);
+routes.post("/posts", /* AuthController.athenticate, */ PostsController.create);
 
 // USUARIO
-routes.get('/user', UserController.listar);
-routes.post('/user', UserController.create);
+routes.get("/user", /* AuthController.athenticate, */ UserController.listar);
+routes.post("/user", /* AuthController.athenticate, */ UserController.create);
 
-
-/*
-//TESTE TOKEN
-routes.post('/teste', async (request, response)=> {
-    const {error} = loginValidacao(request.body);
-    if (error) return response.status(400).send(error.details[0].message);
-
-    const cpfExist = await UserController.findOne({ cpf: request.body.cpf})
-    if (!cpfExist) return response.status(400).send('Cpf não consta no banco ');
-
-    const senhaExist = await SAB_SENHA.compare(request.body.SAB_SENHA, user.SAB_SENHA);
-    if (!senhaExist) return response.status(400).send('Email ou senha inválida')
-
-    response.send('logou');
-
-     
-    const token = jwt.sign({SAB_CODIGO: user.SAB_CODIGO},TOKEN_SECRET, {expiresIn:300} );
-    response.header('auth-token', token).send(token);
-})
-
-
-
-routes.post('/login', async (request, response)=> {
-    const {error} = loginValidacao(request.body);
-    if (error) return response.status(400).send(error.details[0].message);
-
-    const cpfExist = await UserController.findOne({ cpf: request.body.cpf})
-    if (!cpfExist) return response.status(400).send('Cpf não consta no banco ');
-
-    const senhaExist = await SAB_SENHA.compare(request.body.SAB_SENHA, user.SAB_SENHA);
-    if (!senhaExist) return response.status(400).send('Email ou senha inválida')
-
-     response.send('logou');
-})
-*/
+routes.get("/Login", /* AuthController.athenticate, */ UserController.listar);
 
 module.exports = routes;

@@ -11,8 +11,13 @@ body {
     font: 400 14px Roboto, sans-serif;
     background-color: white;
     -webkit-font-smoothing: antialiased;
+    
 }
 
+body::-webkit-scrollbar {
+    display: none;
+  }
+  
 input, button, textarea {
     font: 400 18px Roboto, sans-serif;
 }

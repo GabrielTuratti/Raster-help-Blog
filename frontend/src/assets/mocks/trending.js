@@ -1,3 +1,4 @@
+/*
 import moment from 'moment';
 
 export default [
@@ -66,3 +67,4 @@ export default [
         image: '1.jpg',
     }
 ]
+*/

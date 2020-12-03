@@ -1,13 +1,11 @@
-import moment from 'moment';
+import moment from "moment";
 
 export default [
-
-    {
-        title: 'aaaaaaaaaaaaa ',
-        date: moment().format('MMM DD, YYYY'),
-        categories: [],
-        link:'#',
-        image: 'lg.jpg',
-    },
-    
-]
+  {
+    title: "aaaaaaaaaaaaa ",
+    date: moment().format("MMM DD, YYYY"),
+    categories: [],
+    link: "#",
+    image: "lg.jpg",
+  },
+];
